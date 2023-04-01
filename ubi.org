@@ -1,4 +1,4 @@
-#+TITLE: Mechanical Creativity
+#+TITLE: Ubi
 #+OPTIONS: toc:nil author:nil timestamp:nil 
 
 #+BEGIN_EXPORT html
@@ -20,64 +20,22 @@ blockquote {
 #+END_EXPORT
 
 * Introduction
-A lot of people have a lot of opinions about large language models. That is
-great, but often times discussions about the potential applications of these
-models gets bogged down into metaphysical arguments about the nature of
-intelligence. To pick on Richard Stallman for a second,
-#+BEGIN_QUOTE
-I can't foretell the future, but it is important to realize that ChatGPT is not
-artificial intelligence. It has no intelligence; it doesn't know anything and
-doesn't understand anything. It plays games with words to make
-plausible-sounding English text, but any statements made in it are liable to be
-false. It can't avoid that because it doesn't know what the words _mean_.
 
-[[https://www.reddit.com/r/linux/comments/122gmm9/richard_stallmans_thoughts_on_chatgpt_artificial/][Richard Stallman]]
-#+END_QUOTE
-Of course, how do you test whether or not something has intelligence? Do you see if any
-statements it makes are liable to be false? That would, unfortunately,
-disqualify Richard Stallman and everyone else. How could you tell whether or not
-something actually knows what words _mean_? 
-
-Here is a good take on this I read recently about thinking about how to develop
-these kinds of tests,
-#+BEGIN_QUOTE
-According to the most extreme form of this view the only way by which one could
-be sure that a machine thinks is to be the machine and to feel oneself
-thinking. One could then describe these feelings to the world, but of course no
-one would be justified in taking any notice. Likewise according to this view the
-only way to know that a man thinks is to be that particular man. It is in fact
-the solipsist point of view. It may be the most logical view to hold but it
-makes communication of ideas difficult. A is liable to believe "A thinks but B
-does not" whilst B believes "B thinks but A does not." instead of arguing
-continually over this point it is usual to have the polite convention that
-everyone thinks.
-#+END_QUOTE
-That was written by Alan Turing in 1950, almost 75 years ago at this point. It
-was written in the paper that introduced the Turing Test. Turing argued that the
-question "Can machines think?" is not a useful question to ask, but rather "Can
-machines obtain the properties that make them indistinguishable from things we
-believe do think?". The fundamental thrust of the view expressed by that
-Stallman quote is that intelligence is not something that you can really
-measure. This might be correct to some extent, but if you can't measure it, then
-who really cares? The whole point of the Turing Test paper is to say that the
-question of "What does it mean to think?" is a great question for a
-philosopher. But, if you want to build an artificial intelligence, the main
-thing that you should be focusing on is quantifiable behaviors that are
-correlated with intelligence.
-
-The reason why people should be excited about large language models is that they
-let you do cool stuff. In fact, the recent advancements in generative AI let you
-do cool stuff in a way that was basically impossible a few years ago, but now
-can be done cheaply at scale with just a little bit of effort.
+The recent explosion of generative AI has the potential to change the way we
+think about how to create new things. These models enable collaborative feedback
+loops where the human no longer takes the role of the creator, but instead as a
+curator: providing feedback and guiding the models as they do the brunt of the
+work.
 
 The goal of this installment is to create a vignette of what this way of working
 might look like. It will ignore any discussion about the technical background of
 large language models or philosophical discussions about what they can and
-cannot do. 
+cannot do. The focus is thinking about how we can effectively use these models
+to perform a task that requires creativity.
 
 * What is Ubi?
 
-Ubi is latin for "where." It is also a illumanti themed (no, really) board game
+Ubi is latin for "where." It is also a illumanti themed ([[https://boardgamegeek.com/boardgame/1482/ubi][no, really]]) board game
 from the 1980's that combines trivia and geography. Every turn you are asked a
 cryptic trivia question, such as "Ubi Dostoeveski quill quotations?" and you
 need to locate the answer (in this case, Moscow) on a grid map of the world. The
@@ -102,7 +60,7 @@ can we do?
 
 * Let's Make Some More 
 
-Let's make some more Ubi questions as quickly as we can. We could:
+Let's make some more Ubi questions as quickly and efficiently as we can. We could:
 1. Write the questions ourselves. This is time consuming and can lead to a lack
    of variety in the questions.
 2. Pay other people to write questions. This is also relatively slow and
@@ -414,6 +372,12 @@ and curate the best ones we find. Here are some AI-generated questions:
   position: relative;
 }
 
+.map {
+  width:100%;
+  max-width:100%
+  height:auto;
+}
+
 .question-container {
   width: 600px;
   margin: auto;
@@ -432,13 +396,15 @@ and curate the best ones we find. Here are some AI-generated questions:
 .answer {
   display: none;
   margin-top: 20px;
+  margin-bottom: 2px;
   font-size: 16px;
 }
 
 .source {
-  font-size: 14px;
+  display: none
+  font-size: 16px;
   color: blue;
-  margin-left: 10px;
+  margin-bottom: 5px;
 }
 
 .button-container {
@@ -491,7 +457,31 @@ var currentQuestionIndex = -1;
 var qaPairs = [
 ["Ubi Niagara Falls’ fabled froth flow?", "Ontario, Canada and New York, USA", "https://www.usatoday.com/story/travel/2022/08/25/where-niagara-falls-and-what-city-located-in/10216701002/"],
 ["Ubi Mont Blanc’s massive massif mount?", "The Alps", "https://en.wikipedia.org/wiki/Mont_Blanc_massif"],
-["Ubi Roosevelt’s Rough Riders rally round?", "San Juan Hill, Cuba", "https://www.history.com/news/buffalo-soldiers-spanish-american-war-san-juan-hill-rough-riders"]
+["Ubi Roosevelt’s Rough Riders rally round?", "San Juan Hill, Cuba", "https://www.history.com/news/buffalo-soldiers-spanish-american-war-san-juan-hill-rough-riders"],
+["Ubi Lapland's lonely land lie?", "Northern Europe", "https://scandification.com/where-is-lapland/"],
+["Ubi Inca Empire's early epicenter?", "Cusco, Peru", "https://en.wikipedia.org/wiki/Inca_Empire"],
+["Ubi Appomattox treaty terminate?", "Appomattox Court House, Virginia.", "https://www.history.com/topics/american-civil-war/appomattox-court-house"],
+["Ubi Buddha’s birthplace be?", "Lumbini, Nepal", "https://whc.unesco.org/en/list/666"],
+["Ubi England's White Cliffs cling?", "Dover, England", "https://en.wikipedia.org/wiki/White_Cliffs_of_Dover"],
+["Ubi Big Ben bellow?", "London, England", "https://www.visitlondon.com/things-to-do/sightseeing/london-attraction/big-ben"],
+["Ubi Gyeongbokgung's ornate palace perched?", "Seoul, South Korea", "https://www.theseoulguide.com/gyeongbokgung-palace/"],
+["Ubi La Sagrada Familia proudly preside?", "Barcelona, Spain", "https://en.wikipedia.org/wiki/Sagrada_Fam%C3%ADlia"],
+["Ubi Hagia Sophia's splendor shine?", "Istanbul, Turkey", "https://www.nationalgeographic.com/travel/article/visit-beautiful-building-hagia-sophia"],
+["Ubi Notre-Dame's grandeur grandiosely glistens?", "Paris, France", "https://www.friendsofnotredamedeparis.org/notre-dame-cathedral/"],
+["Ubi Ayers Rock's sacred shrine shine?", "Uluru, Australia", "https://www.britannica.com/place/Uluru-Ayers-Rock"],
+["Ubi Catholic Church's headquarters huddle?", "The Vatican, Rome ", "https://www.funeraldirect.co/the-vatican-the-headquarters-of-the-catholic-church/"],
+["Ubi Great Pyramid's peerless peak?", "Pyramids at Giza, Egypt", "https://www.nationalgeographic.com/history/article/giza-pyramids"],
+["Ubi El Malecon’s wide way wait?", "Havana, Cuba", "https://www.lonelyplanet.com/cuba/havana/centro-habana/attractions/malecon/a/poi-sig/1333969/1341262"],
+["Ubi US' oldest capital city call?", "Santa Fe, New Mexico ", "https://www.oldest.org/geography/us-capitals/"],
+["Ubi Sky Tower's stature soar?", "Auckland, New Zealand", "https://www.veenaworld.com/blog/sky-tower-auckland"],
+["Ubi Western Wall wards?", "Jerusalem, Israel", "https://www.britannica.com/topic/Western-Wall"],
+["Ubi St. Basil's Cathedral floors?", "Moscow, Russia", "https://en.wikipedia.org/wiki/Saint_Basil%27s_Cathedral"],
+["Ubi Nazca Lines' mystery manifest?", "Nazca, Peru", "https://www.history.com/topics/south-america/nazca-lines"],
+["Ubi Elvis's Graceland Mansion magnify?", "Memphis, TN, USA", "https://www.tripsavvy.com/visit-graceland-in-memphis-2321487"],
+["Ubi North Shore surfing soars?", "Oahu, Hawaii ", "https://www.gohawaii.com/islands/oahu/regions/north-shore"],
+["Ubi Wawel Castle spirits swirl?", "Krakow, Poland", "https://krakowmonamour.com/wawel-castle/"],
+["Ubi Angkor Wat's temple tremendous?", "Siem Reap, Cambodia", "https://www.britannica.com/place/Angkor"],
+["Ubi Darwin's famous finches feed?", "The Galapagos Islands", "https://www.thoughtco.com/charles-darwins-finches-1224472"],
 ];
 
 
@@ -511,9 +501,11 @@ function showNextQuestion() {
   question.textContent = qaPairs[currentQuestionIndex][0];
   answer.textContent = qaPairs[currentQuestionIndex][1];
   source.href = qaPairs[currentQuestionIndex][2];
+  source.textContent = "source"
 
   answer.style.display = "none";
   source.style.display = "none";
+  map.src = "./static/ubi/blank.png"
 }
 
 function showLastQuestion() {
@@ -531,7 +523,7 @@ function showLastQuestion() {
   question.textContent = qaPairs[currentQuestionIndex][0];
   answer.textContent = qaPairs[currentQuestionIndex][1];
   source.href = qaPairs[currentQuestionIndex][2];
-
+  source.textContent = "source"
 
   answer.style.display = "none";
   source.style.display = "none";
@@ -541,16 +533,21 @@ function toggleAnswer() {
   var answer = document.getElementById("answer");
   var source = document.getElementById("source");
 
+  var map = document.getElementById("map");
+
   if (answer.style.display === "none") {
     answer.style.display = "block";
     source.style.display = "block";
+    map.src = "./static/ubi/maps/" + currentQuestionIndex + ".png";
   } else {
     answer.style.display = "none";
     source.style.display = "none";
+    map.src = "./static/ubi/blank.png"
   }
 }
 </script>
 <div id="question-container" class="question-container">
+  <img class="map" id="map" src="./static/ubi/blank.png">
   <p class="question">Question 1</p>
   <p class="answer" id="answer"></p>
   <a class="source" id="source" href="" target="_blank"></a>
@@ -565,6 +562,21 @@ function toggleAnswer() {
 <script type="text/javascript">
 showNextQuestion();
 </script>
-
 #+END_EXPORT
 
+* Conclusion
+
+This entire process was relatively quick and painless. Nowadays, It is hard to
+justify the expense of paying someone to do this. The total cost of API usage
+was well less than $20 and the coding portion took an afternoon. You could just
+sit here all day and keep generating and collecting new questions, continually
+honing your prompt and your samples to get the behavior you want. The only limit
+is your own patience.
+
+This is the sort of loop that I think is going to become more and more
+common. The role of the human-in-the-loop is shifting from creation to
+curation. In fact, even writing this was a similar experience. All of the code
+for the simple javascript widget above was mostly written via a collaborative
+feedback loop with ChatGPT. I would ask for a certain feature, it would generate
+the code, and then I would describe how I would like the code to be changed. The
+final version is only slightly edited from the verbatim output.
