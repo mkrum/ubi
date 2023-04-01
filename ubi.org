@@ -18,7 +18,7 @@ blockquote {
 }
 </style>
 #+END_EXPORT
-
+[[https://cf.geekdo-images.com/voLF1xTR77pMVrajwRW1hg__imagepage/img/Z-0y7-s7LHjLDYy4lzKgnv6jDsQ=/fit-in/900x600/filters:no_upscale():strip_icc()/pic511038.jpg]]
 * Introduction
 
 The recent explosion of generative AI has the potential to change the way we
@@ -573,7 +573,7 @@ sit here all day and keep generating and collecting new questions, continually
 honing your prompt and your samples to get the behavior you want. The only limit
 is your own patience.
 
-This is the sort of loop that I think is going to become more and more
+This is the exact kind of loop that I think is going to become more and more
 common. The role of the human-in-the-loop is shifting from creation to
 curation. In fact, even writing this was a similar experience. All of the code
 for the simple javascript widget above was mostly written via a collaborative
