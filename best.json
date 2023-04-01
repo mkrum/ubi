@@ -1,0 +1,250 @@
+[    
+    {
+        "question": "Ubi Niagara Falls\u2019 fabled froth flow?",
+        "translation": "Where is the famous Niagara Falls located?",
+        "answer": "Ontario, Canada and New York, USA",
+        "snippet": "Niagara Falls is located on the Niagara River, which connects two of the five Great Lakes",
+        "link": "https://www.usatoday.com/story/travel/2022/08/25/where-niagara-falls-and-what-city-located-in/10216701002/",
+        "web_answer": "The Niagara River, which connects Lake Erie and Lake Ontario."
+    },
+    {
+        "question": "Ubi Mont Blanc\u2019s massive massif mount?",
+        "translation": "Where is Mont Blanc's massive mountain range located?",
+        "answer": "The Alps",
+        "snippet": "Located mostly in France and Italy, but also straddling Switzerland at its northeastern end.",
+        "link": "https://en.wikipedia.org/wiki/Mont_Blanc_massif",
+        "web_answer": "France, Italy, and Switzerland"
+    },
+    {
+        "question": "Ubi Roosevelt\u2019s Rough Riders rally round?",
+        "translation": "Where did Theodore Roosevelt's Rough Riders gather for their charge?",
+        "answer": "San Juan Hill, Cuba",
+        "snippet": "In their push to capture the strategically important city of Santiago de Cuba, some 8,000 Americans battled for the two nearby hills of San Juan Heights, including Roosevelt\u2019s volunteer...",
+        "link": "https://www.history.com/news/buffalo-soldiers-spanish-american-war-san-juan-hill-rough-riders",
+        "web_answer": "San Juan Heights"
+    },
+    {
+        "question": "Ubi Lapland's lonely land lie?",
+        "translation": "Where is the isolated region of Lapland located?",
+        "answer": "Northern Europe",
+        "snippet": "Lapland is located in Scandinavia\u2019s northernmost stretches, for the most part. It covers the northernmost parts of Sweden and Finland, and it\u2019s actually the largest region in Finland.",
+        "link": "https://scandification.com/where-is-lapland/",
+        "web_answer": "Scandinavia"
+    },
+    {
+        "question": "Ubi Inca Empire's early epicenter?",
+        "translation": "Where was the center of the Inca Empire when it was first established?",
+        "answer": "Cusco, Peru",
+        "snippet": "The administrative, political and military center of the empire was in the city of Cusco. ",
+        "link": "https://en.wikipedia.org/wiki/Inca_Empire",
+        "web_answer": "Cusco"
+    },
+    {
+        "question": "Ubi Appomattox treaty terminate?",
+        "translation": "Where was the Appomattox Treaty signed to end the Civil War?",
+        "answer": "Appomattox Court House, Virginia.",
+        "snippet": "The Battle of Appomattox Court House was fought on April 9, 1865, near the town of Appomattox Court House, Virginia",
+        "link": "https://www.history.com/topics/american-civil-war/appomattox-court-house",
+        "web_answer": "Appomattox Court House, Virginia"
+    },
+    {
+        "question": "Ubi Buddha\u2019s birthplace be?",
+        "translation": "Where was the Buddha's birthplace?",
+        "answer": "Lumbini, Nepal",
+        "snippet": "The Lord Buddha was born in 623 BC in the sacred area of Lumbini located in the Terai plains of southern Nepal",
+        "link": "https://whc.unesco.org/en/list/666",
+        "web_answer": "Nepal"
+    },
+    {
+        "question": "Ubi England's White Cliffs cling?",
+        "translation": "Where are England's White Cliffs located?",
+        "answer": "Dover, England",
+        "snippet": "The White Cliffs of Dover is the region of English coastline facing the Strait of Dover and France.",
+        "link": "https://en.wikipedia.org/wiki/White_Cliffs_of_Dover",
+        "web_answer": "England"
+    },
+    {
+        "answer": "London, England",
+        "translation": "Where can you find Big Ben?",
+        "question": "Ubi Big Ben bellow?",
+        "snippet": "Big Ben is found in the Elizabeth Tower at the north end of The Houses of Parliament in Westminster, Central London, next to the river Thames. ",
+        "link": "https://www.visitlondon.com/things-to-do/sightseeing/london-attraction/big-ben",
+        "web_answer": "Westminster, Central London"
+    },
+    {
+        "answer": "Seoul, South Korea",
+        "translation": "Where can you find the Gyeongbokgung Palace?",
+        "question": "Ubi Gyeongbokgung's ornate palace perched?",
+        "snippet": "Gyeongbokgung Palace is located at the Southern end of the Jongno-gu district in Seoul. ",
+        "link": "https://www.theseoulguide.com/gyeongbokgung-palace/",
+        "web_answer": "Seoul"
+    },
+    {
+        "answer": "Barcelona, Spain",
+        "translation": "Where can you find La Sagrada Familia? ",
+        "question": "Ubi La Sagrada Familia proudly preside?",
+        "snippet": "The Bas\u00edlica i Temple Expiatori de la Sagrada Fam\u00edlia, shortened as the Sagrada Fam\u00edlia, is an unfinished church in the Eixample district of Barcelona, Catalonia, Spain.",
+        "link": "https://en.wikipedia.org/wiki/Sagrada_Fam%C3%ADlia",
+        "web_answer": "Barcelona, Catalonia, Spain"
+    },
+    {
+        "answer": "Istanbul, Turkey",
+        "translation": "Where can you find the Hagia Sophia? ",
+        "question": "Ubi Hagia Sophia's splendor shine?",
+        "snippet": "Dominating Istanbul\u2019s skyline, Hagia Sophia sits in the center of the Sultanahmet District, across from the Blue Mosque and a short walk from the Topkapi Palace. ",
+        "link": "https://www.nationalgeographic.com/travel/article/visit-beautiful-building-hagia-sophia",
+        "web_answer": "Istanbul, Turkey"
+    },
+    {
+        "answer": "Paris, France",
+        "translation": "Where can you find the Notre-Dame Cathedral?",
+        "question": "Ubi Notre-Dame's grandeur grandiosely glistens?",
+        "snippet": "Notre-Dame Cathedral, also known as Notre-Dame de Paris (\u201cOur Lady of Paris\u201d) or simply Notre Dame, is a historic Catholic cathedral located on the eastern half of the \u00cele de la Cit\u00e9 (island in the Seine River) in the 4th arrondissement of Paris, France.",
+        "link": "https://www.friendsofnotredamedeparis.org/notre-dame-cathedral/",
+        "web_answer": "The eastern half of the \u00cele de la Cit\u00e9 in the 4th arrondissement of Paris, France."
+    },
+    {
+        "answer": "Uluru, Australia",
+        "translation": "Where can you find the sacred Ayers Rock?",
+        "question": "Ubi Ayers Rock's sacred shrine shine?",
+        "snippet": "Uluru/Ayers Rock is one of Australia\u2019s best-known tourist destinations. ",
+        "link": "https://www.britannica.com/place/Uluru-Ayers-Rock",
+        "web_answer": "Australia"
+    },
+    {
+        "answer": "The Vatican, Rome ",
+        "translation": "Where can you find the headquarters of the Catholic Church?",
+        "question": "Ubi Catholic Church's headquarters huddle?",
+        "snippet": "The Vatican is the headquarters of the Catholic Church",
+        "link": "https://www.funeraldirect.co/the-vatican-the-headquarters-of-the-catholic-church/",
+        "web_answer": "Rome, Italy"
+    },
+    {
+        "answer": "Pyramids at Giza, Egypt",
+        "translation": "Where can you find the Great Pyramid of Giza?",
+        "question": "Ubi Great Pyramid's peerless peak?",
+        "snippet": "Pharaoh Khufu began the first <b>Giza</b> <b>pyramid</b> project, circa 2550 B.C.",
+        "link": "https://www.nationalgeographic.com/history/article/giza-pyramids",
+        "web_answer": "Giza"
+    },
+    {
+        "answer": "Havana, Cuba",
+        "translation": "Where can you find the wide boulevard El Malecon?",
+        "question": "Ubi El Malecon\u2019s wide way wait?",
+        "snippet": "The Malec\u00f3n, Havana's evocative 7km-long sea drive, is one of the city's most soulful and quintessentially Cuban thoroughfares ",
+        "link": "https://www.lonelyplanet.com/cuba/havana/centro-habana/attractions/malecon/a/poi-sig/1333969/1341262",
+        "web_answer": "Havana, Cuba"
+    },
+    {
+        "answer": "Santa Fe, New Mexico ",
+        "translation": "Where is the oldest capital city in the US located?",
+        "question": "Ubi US' oldest capital city call?",
+        "snippet": "Santa Fe is the oldest state capital in the U.S.",
+        "link": "https://www.oldest.org/geography/us-capitals/",
+        "web_answer": "Santa Fe, New Mexico"
+    },
+    {
+        "answer": "Auckland, New Zealand",
+        "translation": "Where is the Sky Tower located?",
+        "question": "Ubi Sky Tower's stature soar?",
+        "snippet": "Located in Victoria St W, in the central part of Auckland, the Sky Tower ",
+        "link": "https://www.veenaworld.com/blog/sky-tower-auckland",
+        "web_answer": "Auckland, New Zealand"
+    },
+    {
+        "answer": "Siwa Oasis, Egypt",
+        "translation": "Where can you find the Temple of the Oracle?",
+        "question": "Ubi Temple of the Oracle endure?",
+        "snippet": "The 26th-dynasty Temple of the Oracle sits in the northwest corner of the ruins of Aghurmi village.",
+        "link": "https://www.lonelyplanet.com/egypt/western-desert/siwa-oasis/attractions/temple-of-the-oracle/a/poi-sig/495960/355278",
+        "web_answer": "Aghurmi village, Egypt"
+    },
+    {
+        "answer": "Jerusalem, Israel",
+        "translation": "Where can you find the Western Wall?",
+        "question": "Ubi Western Wall wards?",
+        "snippet": "Located in the Old City of Jerusalem ",
+        "link": "https://www.britannica.com/topic/Western-Wall",
+        "web_answer": "Jerusalem"
+    },
+    {
+        "answer": "Granada, Spain",
+        "translation": "Where can you find the Alhambra Palace?",
+        "question": "Ubi Alhambra Palace preside?",
+        "snippet": "The Alhambra is situated in a locale of rare natural beauty. The plateau upon which it was built overlooks the Albaic\u00edn (Albayzin) quarter of Granada\u2019s Moorish old city.",
+        "link": "https://www.britannica.com/topic/Alhambra-fortress-Granada-Spain",
+        "web_answer": "Granada, Spain"
+    },
+    {
+        "answer": "Moscow, Russia",
+        "translation": "Where can you find St. Basil's Cathedral?",
+        "question": "Ubi St. Basil's Cathedral floors?",
+        "snippet": "The Cathedral of Vasily the Blessed (Russian",
+        "link": "https://en.wikipedia.org/wiki/Saint_Basil%27s_Cathedral",
+        "web_answer": "Moscow"
+    },
+    {
+        "answer": "Nazca, Peru",
+        "translation": "Where can you find the mysterious Nazca Lines?",
+        "question": "Ubi Nazca Lines' mystery manifest?",
+        "snippet": "The Nazca Lines are located in the desert plains of the Rio Grande de Nasca river basin",
+        "link": "https://www.history.com/topics/south-america/nazca-lines",
+        "web_answer": "Peru"
+    },
+    {
+        "answer": "Reykjavik, Iceland",
+        "translation": "Where is the most Northerly capital city in the world?",
+        "question": "Ubi the world's most northerly capital crouch?",
+        "snippet": "The most northerly capital city, and the northernmost national capital, is Reykjav\u00a1k, Iceland (64\u00ba08'N). ",
+        "link": "https://guinnessworldrecords.com/world-records/65049-most-northerly-capital-city",
+        "web_answer": "Reykjavik, Iceland"
+    },
+    {
+        "answer": "Memphis, TN, USA",
+        "translation": "Where can you find Elvis's Graceland Mansion?",
+        "question": "Ubi Elvis's Graceland Mansion magnify?",
+        "snippet": "The museum is located at 3734 Elvis Presley Boulevard. Memphis, TN 38186. ",
+        "link": "https://www.tripsavvy.com/visit-graceland-in-memphis-2321487",
+        "web_answer": "Memphis, TN"
+    },
+    {
+        "answer": "Oahu, Hawaii ",
+        "translation": "Where can you find the North Shore of surfing?",
+        "question": "Ubi North Shore surfing soars?",
+        "snippet": "The seven-mile stretch of coastline from Haleiwa to Sunset Beach, colloquially known as the \u201cSeven Mile Miracle\u201d",
+        "link": "https://www.gohawaii.com/islands/oahu/regions/north-shore",
+        "web_answer": "Oahu, Hawaii"
+    },
+    {
+        "answer": "Krakow, Poland",
+        "translation": "Where can you find the ancient Wawel Castle? ",
+        "question": "Ubi Wawel Castle spirits swirl?",
+        "snippet": "Wawel Castle is located on Wawel Hill in the heart of Krakow\u2019s Old Town. ",
+        "link": "https://krakowmonamour.com/wawel-castle/",
+        "web_answer": "Krakow, Poland"
+    },
+    {
+        "answer": "Siem Reap, Cambodia",
+        "translation": "Where are the famous Angkor Wat temples located?",
+        "question": "Ubi Angkor Wat's temple tremendous?",
+        "snippet": "Angkor, archaeological site in what is now northwestern Cambodia",
+        "link": "https://www.britannica.com/place/Angkor",
+        "web_answer": "Cambodia"
+    },
+    {
+        "answer": "The Louvre Museum, Paris",
+        "translation": "Where can you find the Mona Lisa?",
+        "question": "Ubi Mona Lisa smiles?",
+        "snippet": "It was painted sometime between 1503 and 1519, when Leonardo was living in Florence, and it now hangs in the Louvre Museum, Paris,",
+        "link": "https://www.britannica.com/topic/Mona-Lisa-painting",
+        "web_answer": "Paris"
+    },
+    {
+        "answer": "The Galapagos Islands",
+        "translation": "Where can you find the famous finches which gave Darwin his theory of evolution?",
+        "question": "Ubi Darwin's famous finches feed?",
+        "snippet": "On the Galapagos Islands, Darwin observed several species of finches with unique beak shapes. ",
+        "link": "https://www.thoughtco.com/charles-darwins-finches-1224472",
+        "web_answer": "Galapagos Islands"
+    }
+]
