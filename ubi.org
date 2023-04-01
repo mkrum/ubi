@@ -1,0 +1,570 @@
+#+TITLE: Mechanical Creativity
+#+OPTIONS: toc:nil author:nil timestamp:nil 
+
+#+BEGIN_EXPORT html
+<style>
+
+blockquote {
+    margin-bottom: 10px;
+    padding: 10px;
+    background-color: #FFF8DC;
+    border-left: 2px solid #ffeb8e;
+    border-left-color: rgb(255, 228, 102);
+    display: block;
+    margin-block-start: 1em;
+    margin-block-end: 1em;
+    margin-inline-start: 40px;
+    margin-inline-end: 40px;
+}
+</style>
+#+END_EXPORT
+
+* Introduction
+A lot of people have a lot of opinions about large language models. That is
+great, but often times discussions about the potential applications of these
+models gets bogged down into metaphysical arguments about the nature of
+intelligence. To pick on Richard Stallman for a second,
+#+BEGIN_QUOTE
+I can't foretell the future, but it is important to realize that ChatGPT is not
+artificial intelligence. It has no intelligence; it doesn't know anything and
+doesn't understand anything. It plays games with words to make
+plausible-sounding English text, but any statements made in it are liable to be
+false. It can't avoid that because it doesn't know what the words _mean_.
+
+[[https://www.reddit.com/r/linux/comments/122gmm9/richard_stallmans_thoughts_on_chatgpt_artificial/][Richard Stallman]]
+#+END_QUOTE
+Of course, how do you test whether or not something has intelligence? Do you see if any
+statements it makes are liable to be false? That would, unfortunately,
+disqualify Richard Stallman and everyone else. How could you tell whether or not
+something actually knows what words _mean_? 
+
+Here is a good take on this I read recently about thinking about how to develop
+these kinds of tests,
+#+BEGIN_QUOTE
+According to the most extreme form of this view the only way by which one could
+be sure that a machine thinks is to be the machine and to feel oneself
+thinking. One could then describe these feelings to the world, but of course no
+one would be justified in taking any notice. Likewise according to this view the
+only way to know that a man thinks is to be that particular man. It is in fact
+the solipsist point of view. It may be the most logical view to hold but it
+makes communication of ideas difficult. A is liable to believe "A thinks but B
+does not" whilst B believes "B thinks but A does not." instead of arguing
+continually over this point it is usual to have the polite convention that
+everyone thinks.
+#+END_QUOTE
+That was written by Alan Turing in 1950, almost 75 years ago at this point. It
+was written in the paper that introduced the Turing Test. Turing argued that the
+question "Can machines think?" is not a useful question to ask, but rather "Can
+machines obtain the properties that make them indistinguishable from things we
+believe do think?". The fundamental thrust of the view expressed by that
+Stallman quote is that intelligence is not something that you can really
+measure. This might be correct to some extent, but if you can't measure it, then
+who really cares? The whole point of the Turing Test paper is to say that the
+question of "What does it mean to think?" is a great question for a
+philosopher. But, if you want to build an artificial intelligence, the main
+thing that you should be focusing on is quantifiable behaviors that are
+correlated with intelligence.
+
+The reason why people should be excited about large language models is that they
+let you do cool stuff. In fact, the recent advancements in generative AI let you
+do cool stuff in a way that was basically impossible a few years ago, but now
+can be done cheaply at scale with just a little bit of effort.
+
+The goal of this installment is to create a vignette of what this way of working
+might look like. It will ignore any discussion about the technical background of
+large language models or philosophical discussions about what they can and
+cannot do. 
+
+* What is Ubi?
+
+Ubi is latin for "where." It is also a illumanti themed (no, really) board game
+from the 1980's that combines trivia and geography. Every turn you are asked a
+cryptic trivia question, such as "Ubi Dostoeveski quill quotations?" and you
+need to locate the answer (in this case, Moscow) on a grid map of the world. The
+first player to get enough correct answers in enough categories is declared the
+winner.
+
+Ubi's questions come in a very particular format. They are all:
+1. Heavy on aliteration
+2. Heavy on rhymes
+3. Begin with "Ubi"
+
+This is a big part of what makes the game fun. Each question is effectively a
+riddle that you have to solve in order to figure out what it is even asking. For
+example, "Ubi Arizona turn turtle?" is asking "Where was the USS Arizona sunk in
+WWII?"
+
+But, there is a problem. Ubi is no longer in print and many of the
+questions have fallen out of date. The map itself still has the Soviet Union and
+East Germany. In kind, the questions are filled with a lot of references that
+probably crushed in 1985 ("Ubi Mr. Ed Fed?"), but don't exactly land now. What
+can we do?
+
+* Let's Make Some More 
+
+Let's make some more Ubi questions as quickly as we can. We could:
+1. Write the questions ourselves. This is time consuming and can lead to a lack
+   of variety in the questions.
+2. Pay other people to write questions. This is also relatively slow and
+   potentially very expensive. 
+
+Large language models give us a third option. Here is all you need to know
+about large language models to make this work. Large language models take text
+as an input and output more text. Think of it like text complete on your phone,
+but really, really good. We can use this text completion to perform
+tasks. Imagine if you typed,
+#+BEGIN_SRC
+The largest city in Illinois is
+#+END_SRC
+The most likely completion of this text is the correct answer (Chicago). There
+is no constraint that the model will output the actual most likely completion,
+or that this behavior will lead to the correct answer all of the time. All it
+means is that if we give the model a pattern it is going to do it's best to
+follow it.
+   
+All we need to do is to first collect about some examples of what we want. This
+took maybe half an hour of going through the existing cards and putting them
+into a spreadsheet. As you might have guessed, we will be using a language model
+to generate these questions. To make things easy on ourselves, we will be using
+=text-davinci-003=, commonly refereed to as GPT-3.5.
+
+We need a prompt for the model. Let's go really crazy and start with listing all
+of the examples and and adding, "Generate more questions." In python, this
+is just,
+
+#+BEGIN_SRC python
+import os
+import openai
+import pandas as pd
+
+openai.api_key = os.getenv("OPENAI_API_KEY")
+
+df = pd.read_csv("ubi.csv").dropna()
+questions = df['Question'].tolist()
+prompt = "\n".join(questions)
+prompt += "\nGenerate more questions.\n"
+
+output = openai.Completion.create(
+    model="text-davinci-003",
+    prompt=prompt,
+    max_tokens=128,
+)
+print(output['choices'][0]['text'])
+#+END_SRC
+The prompt looks like,
+#+BEGIN_SRC
+Ubi Aral Sea be?
+Ubi a Czech first brandish a Bren gun?
+...
+Ubi Cretan capital crouch?
+Ubi Nebraska’s southeast corner clip?
+Generate more questions.
+#+END_SRC
+What is the most likely completion of this text? More ubi questions. Here are
+the first ten it generated:
+#+BEGIN_SRC
+Ubi highest peak of the Pyrenees perch?
+Ubi Rio Grande rise?
+Ubi Germany’s Black Forest stand?
+Ubi Petra’s ancient tombs tucked?
+Ubi first Easter Egg Roll rolled?
+Ubi Niagara Falls from?
+Ubi first Grand Slam tennis tournament spun?
+Ubi Mississippi River mouth meet?
+Ubi Dead Sea deep?
+Ubi Black Death first strike?
+Ubi Inca Empire’s capital clung?
+#+END_SRC
+
+Some of these are good, some of these are bad. The main problem is that they
+don't really have the same consistent alliteration and flow to them. Let's fix
+this by using the best tool in the prompt engineers toolbox: asking nicely. We
+can update our prompt to say "Generate more questions. Pay special attention to
+the alliteration and general flow." Now, we get
+
+#+BEGIN_SRC
+Ubi Rhine River roll?
+Ubi Picasso paint a portrait?
+Ubi the Four Horsemen ride?
+Ubi Lake Ontario’s eastern edge edge?
+Ubi King Arthur’s castle court?
+Ubi the Grand Banks yield a bounty?
+Ubi the first steam locomotive lurch?
+Ubi the Danube Delta docks?
+Ubi Suez Canal span?
+Ubi the Golden Gate bridge bridge?
+Ubi the Andes’ highest peak peak?
+#+END_SRC
+
+Better, but many of these alliterations are kind of weird ("Ubi the Golden Gate
+bridge bridge" is kind of a stretch). Another way we can improve our performance
+is honing our samples. Right now we are using a random collecting of
+samples. Instead, we can go through and just pick the best of the best and use
+those for the prompt. 
+
+#+BEGIN_SRC
+Ubi Niagara plunge its powerful pound?
+Ubi Alcatraz’s alumni alight?
+Ubi Seine’s source swirl?
+Ubi Solzhenitsyn’s soliloquy spoken?
+Ubi Sydney Harbour’s hulls held?
+Ubi Lapland’s lights lighten?
+Ubi Falkland’s future fate?
+Ubi Dutch tulips twinkle?
+Ubi Colosseum’s colossal crowds clap?
+Ubi St. Paul’s steeple stretch?
+Ubi Fort Knox gold glimmer?
+Ubi Champs-Élysées’ chic shows start?
+#+END_SRC
+
+Looks great. Another fun thing that we can do is generate ubi questions with
+specific answers by changing around the prompt to include the answers first. To
+get some questions about Boston, we can
+#+BEGIN_SRC python
+import os
+import openai
+import pandas as pd
+
+openai.api_key = os.getenv("OPENAI_API_KEY")
+
+df = pd.read_csv("ubi_select.csv").dropna()
+questions = df['Question'].tolist()
+answers = df['Answer'].tolist()
+lines = list(map(lambda qa: f'{qa[1]}: {qa[0]}', zip(questions, answers)))
+prompt = "\n".join(lines)
+prompt += "\nBoston, MA:"
+
+output = openai.Completion.create(
+    model="text-davinci-003",
+    prompt=prompt,
+    max_tokens=64,
+)
+print(output['choices'][0]['text'])
+#+END_SRC
+The prompt looks like,
+#+BEGIN_SRC
+Vatican City: Ubi Ali Agca point a pistol at the Pope?
+Northern Uzbekistan: Ubi Aral Sea be?
+Brno, Czechoslovakia: Ubi a Czech first brandish a Bren gun?
+Naples, Fla.: Ubi Alligator Alley’s western exit at?
+London: Ubi Old Vic sit?
+Calais, France: Ubi Florence Chadwick challenge the Channel?
+Salt Lake City: Ubi Brigham Young set a city?
+Paris: Ubi opera had the Phantom found?
+The Atlantic Ocean: Ubi Amazon River deliver?
+Paris: Ubi Tour de France final furlong found?
+Blenheim Palace, England: Ubi whereabouts of Winnie’s Blenheim birthplace?
+Boston, MA:
+#+END_SRC
+What's the most likely completion of this text? A question about Boston. The
+model generates:
+#+BEGIN_SRC
+Ubi Tea Party’s flotilla float?
+Ubi Celtics cinch championships?
+Ubi Bay State’s capital bustle?
+Ubi Paul Revere's ride spied?
+#+END_SRC
+Just being able to generate a question is only so useful, we also need
+answers. Let's make a prompt that forces the model to think "step-by-step"
+through the answering process. First, we want to translate the question out of
+the ubi format into natural language, then we want to know its answer. We can
+just create three samples of doing this by hand and use this as then prompt,
+#+BEGIN_SRC
+Question: Ubi subway titled Tube?
+Translation: Where do they call the subway the "Tube?"
+Answer: London
+
+Question: WWII’s first bomb boom?
+Translation: Where was the first engagment in WWII?
+Answer: Puck, Poland
+
+Question: Gerry Faust get the oust?
+Translation: Where was the college football coach Gerry Faust famously fired from?
+Answer: South Bend, Ind.
+
+#+END_SRC
+Now, if we prompt the model with a one of its own generated questions,
+#+BEGIN_SRC
+Question: Ubi D-Day's dawns' deadly drama?
+#+END_SRC
+We get,
+#+BEGIN_SRC
+Translation: Where did the D-Day landings take place?
+Answer: Normandy, France
+#+END_SRC
+Which is correct.
+
+However, if we want to generate a lot of new questions, we don't want to have to
+go through each one and check. Unfortunately, when language models just generate
+text unchecked they are in fact liable to make mistakes. Getting an ubi question
+"wrong" because the answer on the card is wrong is, as you can imagine, a very
+frustrating experience.  
+
+Let's see if we can ground the model by teaching it to use a search engine. We
+can use the langchain bing search api to query the web and return some basic
+info. For example, if we run:
+#+BEGIN_SRC python
+import os
+import openai
+from langchain.utilities import BingSearchAPIWrapper
+
+os.environ["BING_SUBSCRIPTION_KEY"] = os.getenv("BING_SUBSCRIPTION_KEY")
+os.environ["BING_SEARCH_URL"] = "https://api.bing.microsoft.com/v7.0/search"
+openai.api_key = os.getenv("OPENAI_API_KEY")
+
+question = "Where do they call the subway the \"Tube?\""
+search = BingSearchAPIWrapper()
+print(search.results(question, 5))
+#+END_SRC
+We will get an output that looks like,
+#+BEGIN_SRC
+"[{'snippet': 'The first metro was opened in London and later most of it was soon built underground (under the city), so it was then <b>called</b> THE UNDERGROUND, even to this day. But in general, in the UK we usually <b>call</b> it THE TUBE, because it mostly goes (or went) inside a tunnel, a tube.', 'title': 'Underground / Subway / Metro / Tube - Multimedia-English', 'link': 'https://multimedia-english.com/grammar/underground-subway-metro-tube-59'}, {'snippet': '“Tube” is only used for underground trains in London. The official name is the “Underground”. The first underground railways, the Metropolitan Railway, and the District and Metropolitan Railway, were built to the normal British loading gauge, so the coaches were the normal size for Britain.', 'title': 'Why do British people call an underground train or subway a &#39;tube&#39;?', 'link': 'https://www.quora.com/Why-do-British-people-call-an-underground-train-or-subway-a-tube'}, {'snippet': 'While stations seem to be busier than ever, London Underground trains have been running below our feet for 156 years now. And for most of its continually evolving history the network has been known simply as &quot;the Tube&quot;. It first came about almost 30 years after the first tracks were laid and tunnels dug. But <b>do</b> you know why?', 'title': 'Why the London Underground is commonly called the Tube', 'link': 'https://www.mylondon.news/news/west-london-news/why-london-underground-called-tube-14976587'}, {'snippet': '<b>Subway</b> is the main American term, but I&#39;ve actually heard a handful of people say metro. In New York we usually actually just <b>call</b> it the train. Tube and underground are British as far as I know. I&#39;m not sure about metro; I know it&#39;s used in some other parts of Europe (France, Russia, etc) but I don&#39;t know how common it in England specifically.', 'title': 'Metro, subway, tube or underground? : r/EnglishLearning - reddit', 'link': 'https://www.reddit.com/r/EnglishLearning/comments/e1sfj1/metro_subway_tube_or_underground/'}]"
+#+END_SRC
+What we would like to do is find the relevant text from the snippets that answer
+our question, and return the link as a citation. We can do this manually for the
+same set of three questions as before,
+#+BEGIN_SRC
+Question: Where do they call the subway "Tube?"
+Web Results: "[{'snippet': 'The first metro was opened in London and later most of it was soon built underground (under the city), so it was then <b>called</b> THE UNDERGROUND, even to this day. But in general, in the UK we usually <b>call</b> it THE TUBE, because it mostly goes (or went) inside a tunnel, a tube.', 'title': 'Underground / Subway / Metro / Tube - Multimedia-English', 'link': 'https://multimedia-english.com/grammar/underground-subway-metro-tube-59'}, {'snippet': '“Tube” is only used for underground trains in London. The official name is the “Underground”. The first underground railways, the Metropolitan Railway, and the District and Metropolitan Railway, were built to the normal British loading gauge, so the coaches were the normal size for Britain.', 'title': 'Why do British people call an underground train or subway a &#39;tube&#39;?', 'link': 'https://www.quora.com/Why-do-British-people-call-an-underground-train-or-subway-a-tube'}, {'snippet': 'While stations seem to be busier than ever, London Underground trains have been running below our feet for 156 years now. And for most of its continually evolving history the network has been known simply as &quot;the Tube&quot;. It first came about almost 30 years after the first tracks were laid and tunnels dug. But <b>do</b> you know why?', 'title': 'Why the London Underground is commonly called the Tube', 'link': 'https://www.mylondon.news/news/west-london-news/why-london-underground-called-tube-14976587'}, {'snippet': '<b>Subway</b> is the main American term, but I&#39;ve actually heard a handful of people say metro. In New York we usually actually just <b>call</b> it the train. Tube and underground are British as far as I know. I&#39;m not sure about metro; I know it&#39;s used in some other parts of Europe (France, Russia, etc) but I don&#39;t know how common it in England specifically.', 'title': 'Metro, subway, tube or underground? : r/EnglishLearning - reddit', 'link': 'https://www.reddit.com/r/EnglishLearning/comments/e1sfj1/metro_subway_tube_or_underground/'}]"
+Relevant Snippet: “Tube” is only used for underground trains in London.
+Relevant Link: https://www.quora.com/Why-do-British-people-call-an-underground-train-or-subway-a-tube
+Answer: London
+
+Question: Where was the first engagment in WWII?
+Web Results: "[{'snippet': 'USS Lexington explodes during the Battle of the Coral Sea. A formation of Spitfires shortly before World <b>War II</b>. This is a list of military engagements of World <b>War II</b> encompassing land, naval, and air engagements as well as campaigns, operations, defensive lines and sieges.', 'title': 'List of military engagements of World War II - Wikipedia', 'link': 'https://en.wikipedia.org/wiki/List_of_military_engagements_of_World_War_II'}, {'snippet': 'The attack on the United States gunboat USS Panay on 12 December 1937 by Japanese forces in China (usually referred to as the Panay incident) could be considered as the <b>first</b> hostile American action during World <b>War II</b>.', 'title': 'First American engagement in World War II - Military Wiki', 'link': 'https://military-history.fandom.com/wiki/First_American_engagement_in_World_War_II'}, {'snippet': 'Scholars have identified various events as being the <b>first</b> <b>engagement</b> of neutralUnited Statesin World War IIbefore the attack on Pearl Harbor. They disagree on which events led to formal entry of the United States into the conflict. Contents 1Attacks on Americans 2Attacks by the U.S. military 2.1Germany 2.2Japan 3See also 4References', 'title': 'First engagement of neutral United States in World War II before the ...', 'link': 'https://en.wikipedia.org/wiki/First_American_engagement_in_World_War_II'}, {'snippet': 'With Adolf Hitler leading a German invasion of Poland in 1939, World <b>War II</b> was launched, a deadly global conflict waged across Europe and the Pacific until 1945. Bloody battles raged between the...', 'title': 'World War II Battles: Timeline - HISTORY', 'link': 'https://www.history.com/topics/world-war-ii/world-war-ii-battles-timeline'}]"
+Relevant Snippet: With Adolf Hitler leading a German invasion of Poland in 1939, World <b>War II</b> was launched 
+Relevant Link: https://www.history.com/topics/world-war-ii/world-war-ii-battles-timeline
+Answer: Poland
+
+Question: Where was the college football coach Gerry Faust famously fired from?
+Web Results: "[{'snippet': 'In 1986, <b>Faust</b> was hired by the University of Akron after the school <b>fired</b> head <b>coach</b> Jim Dennison. Dennison, who is the Akron career wins leader for <b>football</b>, was forced out by university president, William Muse and athletic director, Dave Adams.', 'title': 'Gerry Faust - Wikipedia', 'link': 'https://en.wikipedia.org/wiki/Gerry_Faust'}, {'snippet': '<b>Faust</b>, <b>famously</b> plucked from Cincinnati Moeller High School to <b>coach</b> Notre Dame in the early 1980s, went 43-53-3 from 1986-1994. Like Arth, Owens was a local product, and a high school...', 'title': 'The Akron Zips have fired all their head coaches since 1995. Here&#39;s who ...', 'link': 'https://news.yahoo.com/akron-zips-fired-head-coaches-174645101.html'}, {'snippet': 'CINCINNATI -- In 1960, <b>Gerry</b> <b>Faust</b> pulled a <b>football</b> team out of thin air.. With donated equipment, Archbishop Moeller High School&#39;s first <b>football</b> team -- a reserve squad -- went 4-4. By 1962 ...', 'title': 'From the Vault: Gerry Faust takes Notre Dame job - WCPO', 'link': 'https://www.wcpo.com/news/our-community/from-the-vault/from-the-vault-gerry-faust-puts-moeller-football-on-the-map-leaves-for-notre-dame-after-state-game'}, {'snippet': 'Around 1 p.m. Saturday when a white Moeller transportation van rolled into the private facility along the Little Miami River, <b>Gerry</b> <b>Faust</b> was given a hero&#39;s welcome. He turned 86 on Friday and...', 'title': 'Moeller&#39;s finest honor former football coach Gerry Faust for his birthday', 'link': 'https://www.cincinnati.com/story/sports/high-school/high-school-sports/2021/05/22/moellers-finest-honor-former-football-coach-gerry-faust-his-birthday/5201457001/'}]"
+Relevant Snippet: None
+Relevant Link: None
+Answer: Not listed
+#+END_SRC
+
+It's important to note that for the last question, the web search didn't give
+use the correct answer. In this case, we would like the model to simply decline
+to answer. 
+
+Now, we can automate this process by simply using the above as another prompt to
+the model. By then adding, "Question: Where did the D-Day landings take place?"
+and the web search results, we can have the model answer and cite it's sources
+itself.
+
+#+BEGIN_SRC python
+import os
+import openai
+from langchain.utilities import BingSearchAPIWrapper
+
+os.environ["BING_SUBSCRIPTION_KEY"] = os.getenv("BING_SUBSCRIPTION_KEY")
+os.environ["BING_SEARCH_URL"] = "https://api.bing.microsoft.com/v7.0/search"
+
+openai.api_key = os.getenv("OPENAI_API_KEY")
+
+prompt = open("verify.txt", "r").read()
+
+question = "Where did the D-Day landings take place?"
+search = BingSearchAPIWrapper()
+results = str(search.results(question, 5))
+
+prompt = prompt + f"Question: {question}\nWeb Results: {results}\n"
+
+output = openai.Completion.create(
+    model="text-davinci-003",
+    prompt=prompt,
+    max_tokens=128,
+)
+print(output['choices'][0]['text'])
+#+END_SRC
+This will output something like:
+#+BEGIN_SRC
+Relevant Snippet: The Normandy landings were the landing operations and associated airborne operations on Tuesday, 6 June 1944 of the Allied invasion of Normandy in Operation Overlord during World War II.
+Relevant Link: https://en.wikipedia.org/wiki/Normandy_landings
+Answer: Normandy, France
+#+END_SRC
+
+Now we can generate ubi questions at scale by following a human-in-the-loop algorithm:
+1. Generate questions
+2. Generate explanations for those questions
+3. Generate citations for those explanations
+4. Verify everything checks out
+
+We now have a recipe for generating a bunch of sourced ubi questions. We can
+even connect all of these components into a single script to generate questions
+on the fly. We can then just keep generating questions over and over and over,
+and curate the best ones we find. Here are some AI-generated questions:
+
+#+BEGIN_EXPORT html
+<style>
+.container {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  height: 100vh;
+}
+
+.card {
+  width: 50%;
+  border: 2px solid black;
+  border-radius: 10px;
+  padding: 20px;
+  box-sizing: border-box;
+  position: relative;
+}
+
+.question-container {
+  width: 600px;
+  margin: auto;
+  padding: 20px;
+  border: 1px solid #ccc;
+  box-shadow: 0px 2px 5px #ccc;
+  text-align: center;
+}
+
+.question {
+  margin-bottom: 20px;
+  font-size: 20px;
+  font-weight: bold;
+}
+
+.answer {
+  display: none;
+  margin-top: 20px;
+  font-size: 16px;
+}
+
+.source {
+  font-size: 14px;
+  color: blue;
+  margin-left: 10px;
+}
+
+.button-container {
+  display: flex;
+  justify-content: center;
+  margin-top: 20px;
+}
+
+.next-button {
+  display: block;
+  margin-top: 20px;
+  padding: 10px 20px;
+  font-size: 16px;
+  font-weight: bold;
+  background-color: #4CAF50;
+  color: white;
+  border: none;
+  border-radius: 5px;
+  cursor: pointer;
+  margin: 0;
+}
+
+.back-button {
+  display: block;
+  margin-top: 20px;
+  padding: 10px 20px;
+  font-size: 16px;
+  font-weight: bold;
+  background-color: #4CAF50;
+  color: white;
+  border: none;
+  border-radius: 5px;
+  cursor: pointer;
+  margin: 0;
+}
+
+.next-button:hover {
+  background-color: #3e8e41;
+}
+
+.back-button:hover {
+  background-color: #3e8e41;
+}
+
+</style>
+
+<script type="text/javascript">
+
+var currentQuestionIndex = -1;
+var qaPairs = [
+["Ubi Niagara Falls’ fabled froth flow?", "Ontario, Canada and New York, USA", "https://www.usatoday.com/story/travel/2022/08/25/where-niagara-falls-and-what-city-located-in/10216701002/"],
+["Ubi Mont Blanc’s massive massif mount?", "The Alps", "https://en.wikipedia.org/wiki/Mont_Blanc_massif"],
+["Ubi Roosevelt’s Rough Riders rally round?", "San Juan Hill, Cuba", "https://www.history.com/news/buffalo-soldiers-spanish-american-war-san-juan-hill-rough-riders"]
+];
+
+
+function showNextQuestion() {
+
+  currentQuestionIndex++;
+
+  if (currentQuestionIndex >= qaPairs.length) {
+    currentQuestionIndex = 0;
+  }
+
+  var questionContainer = document.getElementById("question-container");
+  var question = questionContainer.querySelector(".question");
+  var answer = questionContainer.querySelector(".answer");
+  var source = questionContainer.querySelector(".source");
+
+  question.textContent = qaPairs[currentQuestionIndex][0];
+  answer.textContent = qaPairs[currentQuestionIndex][1];
+  source.href = qaPairs[currentQuestionIndex][2];
+
+  answer.style.display = "none";
+  source.style.display = "none";
+}
+
+function showLastQuestion() {
+  currentQuestionIndex--;
+
+  if (currentQuestionIndex < 0) {
+    currentQuestionIndex = qaPairs.length - 1;
+  }
+
+  var questionContainer = document.getElementById("question-container");
+  var question = questionContainer.querySelector(".question");
+  var answer = questionContainer.querySelector(".answer");
+  var source = questionContainer.querySelector(".source");
+
+  question.textContent = qaPairs[currentQuestionIndex][0];
+  answer.textContent = qaPairs[currentQuestionIndex][1];
+  source.href = qaPairs[currentQuestionIndex][2];
+
+
+  answer.style.display = "none";
+  source.style.display = "none";
+}
+
+function toggleAnswer() {
+  var answer = document.getElementById("answer");
+  var source = document.getElementById("source");
+
+  if (answer.style.display === "none") {
+    answer.style.display = "block";
+    source.style.display = "block";
+  } else {
+    answer.style.display = "none";
+    source.style.display = "none";
+  }
+}
+</script>
+<div id="question-container" class="question-container">
+  <p class="question">Question 1</p>
+  <p class="answer" id="answer"></p>
+  <a class="source" id="source" href="" target="_blank"></a>
+  <button onclick="toggleAnswer()">Show Answer</button>
+</div>
+
+<div id="button-container" class="button-container">
+<button id="back-button" class="back-button" onclick="showLastQuestion()">Back</button>
+<button id="next-button" class="next-button" onclick="showNextQuestion()">Next</button>
+</div>
+
+<script type="text/javascript">
+showNextQuestion();
+</script>
+
+#+END_EXPORT
+
