@@ -1,5 +1,6 @@
-#+TITLE: Ubi
+#+TITLE: Few-Shot Ubi 
 #+OPTIONS: toc:nil author:nil timestamp:nil 
+#+HTML_HEAD: <link rel="stylesheet" type="text/css" href="static/pandoc.css" />
 
 #+BEGIN_EXPORT html
 <style>
@@ -18,23 +19,54 @@ blockquote {
 }
 </style>
 #+END_EXPORT
-[[https://cf.geekdo-images.com/voLF1xTR77pMVrajwRW1hg__imagepage/img/Z-0y7-s7LHjLDYy4lzKgnv6jDsQ=/fit-in/900x600/filters:no_upscale():strip_icc()/pic511038.jpg]]
+
+#+CAPTION: [[https://www.artnet.com/artists/jeff-koons/balloon-dog-blue-a-iXBZWvRWceb0tH5BpFRDXg2][Jeff Koons, Ballon Dog (Blue), 2021]]
+[[https://www.artnet.com/WebServices/images/ll2365159llgNojR3CfDrCWBHBAD/jeff-koons-balloon-dog-(blue).jpg]]
+
 * Introduction
 
-The recent explosion of generative AI has the potential to change the way we
-think about how to create new things. These models enable collaborative feedback
-loops where the human no longer takes the role of the creator, but instead as a
-curator: providing feedback and guiding the models as they do the brunt of the
-work.
+In 2019, Jeff Koons set the record for most expensive artwork ever sold at
+auction by a living artist at $91.1 million dollars. In fact, although he
+no longer holds it, this was the second time he had set that
+record. The first time being in 2013, when he sold a different artwork for $58.4
+million dollars.
 
-The goal of this installment is to create a vignette of what this way of working
-might look like. It will ignore any discussion about the technical background of
-large language models or philosophical discussions about what they can and
-cannot do. The focus is thinking about how we can effectively use these models
-to perform a task that requires creativity.
+Besides being very successful, Jeff Koons is also known for the way in which he
+makes his art. He runs a massive studio operation. At one point, he had 100
+employees just in the "painting department" alone. His studio is large enough to have
+"layoffs". [fn:0] From the outside, it seems closer to [[https://news.artnet.com/art-world/jeff-koons-radically-downsizes-his-studio-laying-off-half-his-painting-staff-998666][a factory run by Henry
+Ford]] than an art commune.
 
-* What is Ubi?
+Although he is a bit of an outlier, this kind of setup is surprisingly not that
+uncommon for successful artists today. However, that doesn't mean the practice
+is entirely new. The use of labor from apprentices was very common even among the
+"Old Masters." The manual labor of the actual painting or creating of a piece
+can be and often is outsourced.
 
+Why? Because you don't buy a piece by Jeff Koons because he's the best
+painter. [fn:1] The role of the artist in these cases is more of a creative
+director on a large industrial project than a craftsman. They need to make sure
+the final product fits their vision. As long as it does, who cares who painted what?
+
+The recent explosion of generative AI has the potential to further change the
+way we think about the creative process. These models have the ability to take
+the same feedback loop that someone like Jeff Koons might utilize and automate
+half of it. Creating becomes less about what you could do yourself, and more
+about your ability to guide an existing process to create something interesting.
+
+The goal of this installment is to try to solidify this more through an
+example. It will ignore any discussion about the technical background of the
+particular form of generative model we will be using (large language models) or
+philosophical discussions about what they can and cannot do. The focus is
+thinking about how we can effectively use these models to perform a task that
+requires creativity.
+
+* Ubi
+
+#+CAPTION: [[https://boardgamegeek.com/boardgame/1482/ubi][The Ubi Box]]
+[[https://cf.geekdo-images.com/voLF1xTR77pMVrajwRW1hg__imagepage/img/Z-0y7-s7LHjLDYy4lzKgnv6jDsQ=/fit-in/900x600/filters:no_upscale():strip_icc()/pic511038.jpg]]
+
+** What is Ubi?
 Ubi is latin for "where." It is also a illumanti themed ([[https://boardgamegeek.com/boardgame/1482/ubi][no, really]]) board game
 from the 1980's that combines trivia and geography. Every turn you are asked a
 cryptic trivia question, such as "Ubi Dostoeveski quill quotations?" and you
@@ -46,48 +78,83 @@ Ubi's questions come in a very particular format. They are all:
 1. Heavy on aliteration
 2. Heavy on rhymes
 3. Begin with "Ubi"
+Here are some examples:
+#+BEGIN_SRC
+Ubi Bonneville barriers broken?
+Ubi northernmost Olympic torch scorched?
+Ubi Alaska’s Sitka sit?
+Ubi Cotton Bowl unroll?
+Ubi Mount McKinley’s two sizable summits sited?
+Ubi Stone of Scone’s home?
+Ubi Manx cats meow?
+Ubi Banff Springs spring?
+Ubi The Exorcist exorcise?
+Ubi highest cliff RFK climbed?
+Ubi WWII’s first bomb boom?
+#+END_SRC
 
-This is a big part of what makes the game fun. Each question is effectively a
-riddle that you have to solve in order to figure out what it is even asking. For
-example, "Ubi Arizona turn turtle?" is asking "Where was the USS Arizona sunk in
-WWII?"
+The question format is a big part of what makes the game fun. Each question is
+effectively a riddle that you have to solve in order to figure out what it is
+even asking. For example, "Ubi Arizona turn turtle?" is asking "Where was the
+USS Arizona sunk in WWII?"
 
-But, there is a problem. Ubi is no longer in print and many of the
-questions have fallen out of date. The map itself still has the Soviet Union and
-East Germany. In kind, the questions are filled with a lot of references that
-probably crushed in 1985 ("Ubi Mr. Ed Fed?"), but don't exactly land now. What
-can we do?
+But, there is a problem. Ubi is no longer in print and many of the questions
+have fallen out of date. The map itself still has the Soviet Union and East
+Germany. The questions are filled with a lot of references that probably crushed
+in 1985 ("Ubi Mr. Ed Fed?"), but don't exactly land now.
 
-* Let's Make Some More 
+Our goal will be to create more Ubi questions. Although potentially not as lofty
+a goal as creating sculptures that will sell for tens of millions of dollars,
+this simple task has all the attributes we need. There is no quantitative
+measure of what makes a good Ubi question. In that regard, it requires some
+amount of creativity to do successfully.
 
-Let's make some more Ubi questions as quickly and efficiently as we can. We could:
+** Making More Ubi Questions
+
+Let's think about how we could go about this process. We could:
 1. Write the questions ourselves. This is time consuming and can lead to a lack
    of variety in the questions.
 2. Pay other people to write questions. This is also relatively slow and
    potentially very expensive. 
 
-Large language models give us a third option. Here is all you need to know
-about large language models to make this work. Large language models take text
-as an input and output more text. Think of it like text complete on your phone,
-but really, really good. We can use this text completion to perform
-tasks. Imagine if you typed,
+Large language models give us a third option. The following is all you need to
+know about large language models to make this work. Large language models take
+text as an input and output more text. Think of it like text complete on your
+phone, but really, really good. We can use this text completion to perform
+tasks. Imagine if you typed out,
 #+BEGIN_SRC
 The largest city in Illinois is
 #+END_SRC
-The most likely completion of this text is the correct answer (Chicago). There
-is no constraint that the model will output the actual most likely completion,
-or that this behavior will lead to the correct answer all of the time. All it
-means is that if we give the model a pattern it is going to do it's best to
-follow it.
-   
-All we need to do is to first collect about some examples of what we want. This
-took maybe half an hour of going through the existing cards and putting them
-into a spreadsheet. As you might have guessed, we will be using a language model
-to generate these questions. To make things easy on ourselves, we will be using
-=text-davinci-003=, commonly refereed to as GPT-3.5.
+The most likely completion of this text is the correct answer
+(Chicago). If you wanted your language model to be able to answer other
+questions, you could design a simple pattern
+#+BEGIN_SRC
+Question: What is the largest city in Illinois?
+Answer: Chicago
 
-We need a prompt for the model. Let's go really crazy and start with listing all
-of the examples and and adding, "Generate more questions." In python, this
+Question: <insert question here>
+Answer: 
+#+END_SRC
+The most likely continuation of this text based on the defined pattern is the
+answer for whatever question we insert. This does not mean that the language
+model will always output the right answer. There is no constraint that the model
+will output the actual most likely completion, or that this behavior will lead
+to the correct answer all of the time. In fact, it will often be wrong. However,
+the surprising thing about large language models is that they are good enough to
+right fairly often.
+
+All we can count on is that if we give the model a pattern it is going to do
+it's best to follow it. Designing the right text inputs to get your language
+model to perform different tasks is an entire burgeoning field of study called
+"prompt engineering."
+   
+To start making our prompt for this task we first can collect about examples of
+what we want. This took maybe half an hour of going through the existing cards
+and putting them into a spreadsheet. We will be using =text-davinci-003=, commonly
+refereed to as GPT-3.5, as our language model.
+
+For our first version of the prompt, let's go really crazy and list
+all of the examples and add, "Generate more questions." In python, this
 is just,
 
 #+BEGIN_SRC python
@@ -158,7 +225,7 @@ Better, but many of these alliterations are kind of weird ("Ubi the Golden Gate
 bridge bridge" is kind of a stretch). Another way we can improve our performance
 is honing our samples. Right now we are using a random collecting of
 samples. Instead, we can go through and just pick the best of the best and use
-those for the prompt. 
+those for the prompt. Now, we get
 
 #+BEGIN_SRC
 Ubi Niagara plunge its powerful pound?
@@ -179,25 +246,27 @@ Looks great. Another fun thing that we can do is generate ubi questions with
 specific answers by changing around the prompt to include the answers first. To
 get some questions about Boston, we can
 #+BEGIN_SRC python
-import os
-import openai
-import pandas as pd
+  import os
+  import openai
+  import pandas as pd
 
-openai.api_key = os.getenv("OPENAI_API_KEY")
+  openai.api_key = os.getenv("OPENAI_API_KEY")
 
-df = pd.read_csv("ubi_select.csv").dropna()
-questions = df['Question'].tolist()
-answers = df['Answer'].tolist()
-lines = list(map(lambda qa: f'{qa[1]}: {qa[0]}', zip(questions, answers)))
-prompt = "\n".join(lines)
-prompt += "\nBoston, MA:"
+  df = pd.read_csv("ubi_select.csv").dropna()
+  questions = df['Question'].tolist()
+  answers = df['Answer'].tolist()
 
-output = openai.Completion.create(
-    model="text-davinci-003",
-    prompt=prompt,
-    max_tokens=64,
-)
-print(output['choices'][0]['text'])
+  qa_pairs = zip(questions, answers)
+  lines = list(map(lambda qa: f'{qa[1]}: {qa[0]}', qa_pairs))
+  prompt = "\n".join(lines)
+  prompt += "\nBoston, MA:"
+
+  output = openai.Completion.create(
+      model="text-davinci-003",
+      prompt=prompt,
+      max_tokens=64,
+  )
+  print(output['choices'][0]['text'])
 #+END_SRC
 The prompt looks like,
 #+BEGIN_SRC
@@ -222,11 +291,14 @@ Ubi Celtics cinch championships?
 Ubi Bay State’s capital bustle?
 Ubi Paul Revere's ride spied?
 #+END_SRC
+
+** Answering Ubi Questions
+
 Just being able to generate a question is only so useful, we also need
 answers. Let's make a prompt that forces the model to think "step-by-step"
 through the answering process. First, we want to translate the question out of
-the ubi format into natural language, then we want to know its answer. We can
-just create three samples of doing this by hand and use this as then prompt,
+the ubi format into natural language. Then, we want to know the answer. We can
+just create three samples of doing this by hand and use this as the prompt,
 #+BEGIN_SRC
 Question: Ubi subway titled Tube?
 Translation: Where do they call the subway the "Tube?"
@@ -253,26 +325,27 @@ Answer: Normandy, France
 Which is correct.
 
 However, if we want to generate a lot of new questions, we don't want to have to
-go through each one and check. Unfortunately, when language models just generate
-text unchecked they are in fact liable to make mistakes. Getting an ubi question
-"wrong" because the answer on the card is wrong is, as you can imagine, a very
-frustrating experience.  
+go through each one and check that its accurate. Getting an ubi question "wrong"
+because the answer on the card is wrong is, as you can imagine, a very
+frustrating experience.
 
 Let's see if we can ground the model by teaching it to use a search engine. We
 can use the langchain bing search api to query the web and return some basic
 info. For example, if we run:
 #+BEGIN_SRC python
-import os
-import openai
-from langchain.utilities import BingSearchAPIWrapper
+    import os
+    import openai
+    from langchain.utilities import BingSearchAPIWrapper
 
-os.environ["BING_SUBSCRIPTION_KEY"] = os.getenv("BING_SUBSCRIPTION_KEY")
-os.environ["BING_SEARCH_URL"] = "https://api.bing.microsoft.com/v7.0/search"
-openai.api_key = os.getenv("OPENAI_API_KEY")
+    os.environ["BING_SUBSCRIPTION_KEY"] = \
+	os.getenv("BING_SUBSCRIPTION_KEY")
+    os.environ["BING_SEARCH_URL"] = \
+	"https://api.bing.microsoft.com/v7.0/search"
+    openai.api_key = os.getenv("OPENAI_API_KEY")
 
-question = "Where do they call the subway the \"Tube?\""
-search = BingSearchAPIWrapper()
-print(search.results(question, 5))
+    question = "Where do they call the subway the \"Tube?\""
+    search = BingSearchAPIWrapper()
+    print(search.results(question, 5))
 #+END_SRC
 We will get an output that looks like,
 #+BEGIN_SRC
@@ -305,35 +378,40 @@ It's important to note that for the last question, the web search didn't give
 use the correct answer. In this case, we would like the model to simply decline
 to answer. 
 
-Now, we can automate this process by simply using the above as another prompt to
-the model. By then adding, "Question: Where did the D-Day landings take place?"
-and the web search results, we can have the model answer and cite it's sources
+Now, we can automate this process by using the above as another prompt to the
+model. By then adding, "Question: Where did the D-Day landings take place?"  and
+the web search results, we can have the model answer and cite it's sources
 itself.
 
 #+BEGIN_SRC python
-import os
-import openai
-from langchain.utilities import BingSearchAPIWrapper
+  import os
+  import openai
+  from langchain.utilities import BingSearchAPIWrapper
 
-os.environ["BING_SUBSCRIPTION_KEY"] = os.getenv("BING_SUBSCRIPTION_KEY")
-os.environ["BING_SEARCH_URL"] = "https://api.bing.microsoft.com/v7.0/search"
+  os.environ["BING_SUBSCRIPTION_KEY"] = \
+      os.getenv("BING_SUBSCRIPTION_KEY")
+  os.environ["BING_SEARCH_URL"] = \
+      "https://api.bing.microsoft.com/v7.0/search"
 
-openai.api_key = os.getenv("OPENAI_API_KEY")
+  openai.api_key = os.getenv("OPENAI_API_KEY")
 
-prompt = open("verify.txt", "r").read()
+  # Prompt truncated for display. See above for full prompt
+  prompt = """
+  Question: Where do they call the subway "Tube?"
+  ...
+  """
+  question = "Where did the D-Day landings take place?"
+  search = BingSearchAPIWrapper()
+  results = str(search.results(question, 5))
 
-question = "Where did the D-Day landings take place?"
-search = BingSearchAPIWrapper()
-results = str(search.results(question, 5))
+  prompt += f"Question: {question}\nWeb Results: {results}\n"
 
-prompt = prompt + f"Question: {question}\nWeb Results: {results}\n"
-
-output = openai.Completion.create(
-    model="text-davinci-003",
-    prompt=prompt,
-    max_tokens=128,
-)
-print(output['choices'][0]['text'])
+  output = openai.Completion.create(
+      model="text-davinci-003",
+      prompt=prompt,
+      max_tokens=128,
+  )
+  print(output['choices'][0]['text'])
 #+END_SRC
 This will output something like:
 #+BEGIN_SRC
@@ -341,17 +419,22 @@ Relevant Snippet: The Normandy landings were the landing operations and associat
 Relevant Link: https://en.wikipedia.org/wiki/Normandy_landings
 Answer: Normandy, France
 #+END_SRC
+Although this process is still prone to some errors, the errors are a lot easier
+to catch. 
+
+** AI-Generated Ubi
 
 Now we can generate ubi questions at scale by following a human-in-the-loop algorithm:
-1. Generate questions
-2. Generate explanations for those questions
-3. Generate citations for those explanations
-4. Verify everything checks out
+1. Generate some questions.
+2. Generate explanations for those questions.
+3. Generate citations for those explanations.
+4. Verify everything checks out.
 
-We now have a recipe for generating a bunch of sourced ubi questions. We can
-even connect all of these components into a single script to generate questions
-on the fly. We can then just keep generating questions over and over and over,
-and curate the best ones we find. Here are some AI-generated questions:
+We can even connect all of these components into a single script to generate
+questions on the fly. We can then just keep generating questions over and over
+and over, and curate the best ones we find.
+
+Here are some AI-generated questions:
 
 #+BEGIN_EXPORT html
 <style>
@@ -570,13 +653,32 @@ This entire process was relatively quick and painless. Nowadays, It is hard to
 justify the expense of paying someone to do this. The total cost of API usage
 was well less than $20 and the coding portion took an afternoon. You could just
 sit here all day and keep generating and collecting new questions, continually
-honing your prompt and your samples to get the behavior you want. The only limit
-is your own patience.
+honing your prompt to get the exact behavior you want. The only limit is your
+own patience.
 
-This is the exact kind of loop that I think is going to become more and more
-common. The role of the human-in-the-loop is shifting from creation to
-curation. In fact, even writing this was a similar experience. All of the code
-for the simple javascript widget above was mostly written via a collaborative
-feedback loop with ChatGPT. I would ask for a certain feature, it would generate
-the code, and then I would describe how I would like the code to be changed. The
-final version is only slightly edited from the verbatim output.
+In fact, this is what has happened to Jeff Koons studio. The layoffs were mostly
+in favor of increasing automation. [fn:0] It is not hard to understand why. This
+loop is almost exactly the same as if we replaced the API call with a person. We
+started with a vague set of criteria. Through seeing what the response to
+that criteria was, we were able to slowly adjust it to align with the output we
+desired. The value of these generative model's is that they give us a medium
+that is fast, cheap, and reproducible. You don't need to hire a writer, you just
+need to pay OpenAI a few cents.
+
+In fact, even writing this was a similar experience. All of the code for the
+simple javascript widget used to display the questions above was mostly written
+via a collaborative feedback loop with [[https://chat.openai.com][chatGPT]]. I would ask for a certain
+feature, it would generate the code, and then I would describe how I would like
+the code to be changed. The final version is only slightly edited from the
+verbatim output.
+
+This loop is going to become more and more pervasive in our lives. From software
+development, to creative writing, to potentially even things like medicine, we
+are all going to become more like Jeff Koons.
+
+And hopefully we are going to be better off for it, but who knows.
+
+[fn:0] https://news.artnet.com/art-world/jeff-koons-downsizing-1442788
+
+[fn:1] You do because you just want to impress your rich friends. Or, as an investment. Or,
+a million other reasons but you get the point.
