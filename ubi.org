@@ -1,4 +1,4 @@
-#+TITLE: Few-Shot Ubi 
+#+TITLE: Creating With Generative Models: A Case Study in Ubi 
 #+OPTIONS: toc:nil author:nil timestamp:nil 
 #+HTML_HEAD: <link rel="stylesheet" type="text/css" href="static/pandoc.css" />
 
